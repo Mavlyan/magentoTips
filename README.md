@@ -34,3 +34,23 @@ How to use:
 2. Change productId, shipping method, payment method, customer Id which exist in your magento store.
 Or request for these data from store via blablablaList() api methods (eg catalogProductList())
 3. Run it from your local env
+
+### 5. Create admin user
+
+paste it to test.php and run
+
+```
+$user = Mage::getModel('admin/user')
+->setData(array(
+    'username'  => 'seller1',
+    'firstname' => 'Seller',
+    'lastname'    => 'Seller',
+    'email'     => 'xyz@seller.com',
+    'password'  =>'seller123',
+    'is_active' => 1
+))->save();
+
+$user->setRoleIds(array(1))  //assign seller role id
+    ->setRoleUserId($user->getUserId())
+    ->saveRelations();
+```
