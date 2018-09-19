@@ -54,3 +54,14 @@ $user->setRoleIds(array(1))  //assign seller role id
     ->setRoleUserId($user->getUserId())
     ->saveRelations();
 ```
+OR for Existing user
+
+```
+$user = Mage::getModel('admin/user')
+    ->loadByUsername('admin')
+    ->setPassword('qwerty24M')
+    ->save();
+
+
+```
+
