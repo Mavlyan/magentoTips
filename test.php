@@ -1,28 +1,19 @@
 <?php
-chdir(dirname(__FILE__));
 
-require 'app/bootstrap.php';
-require 'app/Mage.php';
+require dirname(__DIR__) . '/app/bootstrap.php';
 
-Mage::setIsDeveloperMode(true);
+$params = $_SERVER;
 
-ini_set('display_errors', 1);
+$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $params);
+$obMan = $bootstrap->getObjectManager();
 
-umask(0);
+/**
+    BCЁ 3DECb MOJHO USATb ObjectManager N Bbl3blBATb METHObl. HAIIPNMEP:
+*/
 
-$mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : '';
-$mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
+$emailCron = $obMan->get(\Moogento\Kkm\Crontab\Report::class);
 
-Mage::app();
+dump($emailCron->execute());
+die();
 
-/***********************************/
-//If I need to run script as Admin:
-//Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 
-        try {
-            #Place your code here
-        } catch (Exception $exc) {
-            var_dump($exc->getMessage());
-            echo $exc->getTraceAsString();
-        }
-        
